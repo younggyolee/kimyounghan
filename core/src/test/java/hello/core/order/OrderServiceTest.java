@@ -6,11 +6,13 @@ import hello.core.member.MemberService;
 import hello.core.member.MemberServiceImpl;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import hello.core.AppConfig;
 
 public class OrderServiceTest {
+    AppConfig appConfig = new AppConfig();
 
-    MemberService memberService = new MemberServiceImpl();
-    OrderService orderService = new OrderServiceImpl();
+    MemberService memberService = appConfig.memberService();
+    OrderService orderService = appConfig.orderService();
 
     @Test
     void createOrder() {
@@ -20,6 +22,5 @@ public class OrderServiceTest {
 
         Order order = orderService.createOrder(memberId, "itemA", 10000);
         Assertions.assertThat(order.getDiscountPrice()).isEqualTo(1000);
-
     }
 }
